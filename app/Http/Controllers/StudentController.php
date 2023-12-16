@@ -9,6 +9,7 @@ use App\Models\User;
 use App\Models\Late;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Carbon;
 
 class StudentController extends Controller
 {   
@@ -48,7 +49,7 @@ class StudentController extends Controller
                     ->from('rayons')
                     ->where('user_id', Auth::user()->id);
             });
-        })->count();
+        })->whereDate('created_at', Carbon::today())->count();
         
         return view('pages.user.dashboard', compact('students', 'rayon', 'rombel', 'users', 'lates', 'totalStudents', 'lateStudent'));
     }

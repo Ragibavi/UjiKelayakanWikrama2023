@@ -14,7 +14,7 @@
                         </p>
                     </div>
                     <div class="basis-[50%] bg-white rounded-md h-[200px] mt-8 ">
-                        <p class="text-3xl ml-4 mt-2 " >Keterlambatan</p>
+                        <p class="text-3xl ml-4 mt-2 " >Keterlambatan Hari Ini</p>
                         <p class="text-8xl ml-4 mt-2 "><ion-icon class="ml-4 mr-8 mt-2 text-7xl" name="person-outline"></ion-icon>
                             {{ $lateStudent}}
                         </p>
