@@ -53,6 +53,21 @@ class StudentController extends Controller
         
         return view('pages.user.dashboard', compact('students', 'rayon', 'rombel', 'users', 'lates', 'totalStudents', 'lateStudent'));
     }
+    public function studentUser()
+    {
+        $users = User::all();
+        $students = Student::all();
+        $rayon = Rayon::all();
+        $rombel =Rombel::all();
+
+        $total = Student::where('rayon_id', function ($query) {
+            $query->select('id')
+                ->from('rayons')
+                ->where('user_id', Auth::user()->id);
+        })->get();
+      
+        return view('pages.user.student', compact('students', 'rayon', 'rombel', 'users', 'total'));
+    }
 
     /**
      * Show the form for creating a new resource.

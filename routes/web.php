@@ -56,6 +56,7 @@ Route::middleware(['IsLogin','IsAdmin'])->group(function () {
     Route::delete('/student/{id}', [StudentController::class, 'destroy'])->name('pages.student.destroy');
 
     Route::get('/datelate', [LateController::class, 'index'])->name('pages.dateLate');
+    Route::get('/datelate', [LateController::class, 'index'])->name('pages.dateLate');
     Route::get('/dateLateCreate', [LateController::class, 'create'])->name('pages.dateLate.create');
     Route::post('/dateLateStore', [LateController::class, 'store'])->name('pages.dateLate.store');
     Route::get('/dateLateEdit/{id}', [LateController::class, 'edit'])->name('pages.dateLate.edit');
@@ -66,4 +67,5 @@ Route::middleware(['IsLogin','IsAdmin'])->group(function () {
 
 Route::middleware(['IsLogin','IsUser'])->group(function () {
     Route::get('/dashboard/User', [StudentController::class, 'indexUser'])->name('pages.user.dashboard');
+    Route::get('/Student/User', [StudentController::class, 'studentUser'])->name('pages.user.student');
 });
