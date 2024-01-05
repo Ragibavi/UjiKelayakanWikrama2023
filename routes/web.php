@@ -71,7 +71,6 @@ Route::middleware(['IsLogin','IsAdmin'])->group(function () {
     Route::patch('/datelate/{id}', [LateController::class, 'update'])->name('pages.datelate.update');
     Route::delete('/dateLate/{id}', [LateController::class, 'destroy'])->name('pages.dateLate.destroy');
     Route::get('/dateLateDetail/{student_id}', [LateController::class, 'detail'])->name('pages.dateLate.detail');
-    Route::get('/export', [LateController::class, 'export'])->name('pages.dateLate.export');
 });
 
 Route::middleware(['IsLogin','IsUser'])->group(function () {
@@ -80,8 +79,9 @@ Route::middleware(['IsLogin','IsUser'])->group(function () {
     Route::get('/datalate/User', [LateController::class, 'indexUser'])->name('pages.user.dateLate');
     Route::get('/dateLateDetail/{student_id}', [LateController::class, 'detail'])->name('pages.dateLate.detail');
     Route::get('/cetakPdf/{id}', [StudentController::class, 'cetakPdf'])->name('pages.cetakPdf');
-    Route::get('/export', [LateController::class, 'export'])->name('pages.dateLate.export');
 });
+
+Route::get('/export', [LateController::class, 'export'])->name('pages.dateLate.export');
 
 Route::get('/fallback', function () {
     return view('pages.notFound');
@@ -97,7 +97,7 @@ Route::middleware(['storeLastVisitedPage', 'redirectLastVisitedPage'])->group(fu
             return view('login');
         }
     })->name('login');
-    
+
     Route::get('/fallback', function () {
         return view('pages.notFound');
     })->name('notFound');

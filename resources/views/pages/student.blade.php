@@ -15,11 +15,6 @@
                 <div class="data-late mt-6 ml-12 mr-12 flex justify-between items-center">
                     <div>
                     </div>
-                    <div class="search">
-                        <div class="search-input mr-4">
-                            <input type="text" class="w-[200px] border px-4 rounded" placeholder="Search">
-                        </div>
-                    </div>
                 </div>
                 <hr class="mt-2">
                 

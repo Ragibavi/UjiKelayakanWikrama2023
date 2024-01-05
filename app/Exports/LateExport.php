@@ -35,11 +35,13 @@ class LateExport implements FromCollection
                 'Rombel',
                 'Rayon',
                 'Total',
-            ]);
-        
+            ]);        
     
             return $late;
-        }else {
+
+        }
+        
+        else {
             $students = Student::where('rayon_id', function ($query) {
                 $query->select('id')
                     ->from('rayons')

@@ -8,17 +8,12 @@
             <p class="text-[15px] mt-2 ml-[2px]">Home / <span class="font-bold">Data User</span> </p>
         </div>
         <div class="flex items-center justify-center">
-            <div class="data-container w-[92%] h-[500px] bg-white rounded-md mt-[180px]">
+            <div class="data-container w-[92%] h-auto bg-white rounded-md mt-[180px]">
                 <div class="button mt-6">
                     <a href="{{ route('pages.user.create')}}" class="w-[200px] h-[80px] rounded-md text-white px-3 py-2 text-x ml-12" style="background: rgb(0, 145, 255);">Tambah Data User</a>
                 </div>
                 <div class="data-late mt-6 ml-12 mr-12 flex justify-between items-center">
                     <div>
-                    </div>
-                    <div class="search">
-                        <div class="search-input mr-4">
-                            <input type="text" class="w-[200px] border px-4 rounded" placeholder="Search">
-                        </div>
                     </div>
                 </div>
                 <hr class="mt-2">
