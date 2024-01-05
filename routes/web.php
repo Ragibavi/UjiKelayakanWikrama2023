@@ -70,5 +70,6 @@ Route::middleware(['IsLogin','IsUser'])->group(function () {
     Route::get('/dashboard/User', [StudentController::class, 'indexUser'])->name('pages.user.dashboard');
     Route::get('/Student/User', [StudentController::class, 'studentUser'])->name('pages.user.student');
     Route::get('/datalate/User', [LateController::class, 'indexUser'])->name('pages.user.dateLate');
+    Route::get('/dateLateDetail/{student_id}', [LateController::class, 'detail'])->name('pages.dateLate.detail');
     Route::get('/cetakPdf/{id}', [StudentController::class, 'cetakPdf'])->name('pages.cetakPdf');
 });

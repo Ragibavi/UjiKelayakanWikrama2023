@@ -19,11 +19,6 @@
                         @if (Auth::check())
                 @endif
                     </div>
-                    <div class="search">
-                        <div class="search-input mr-4">
-                            <input type="text" class="w-[200px] border px-4 rounded" placeholder="Search">
-                        </div>
-                    </div>
                 </div>
                 <hr class="mt-2">
                 
@@ -61,7 +56,7 @@
                             <th>NIS</th>
                             <th>Nama</th>
                             <th>Jumlah Keterlambatan</th>
-                            <th>Cetak PDF</th>
+                            <th>Action</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -84,7 +79,17 @@
                                 <td>{{ $name }}</td>
                                 <td>{{ $info['count'] }}</td>
                                 <td>
-                                    <a href="{{ route('pages.cetakPdf', $info['data']->student->id) }}" class="edit-button">Edit</a>
+                                    <div class="button-container">
+                                        <div class="edit-btn">
+                                            <a href="{{ route('pages.dateLate.detail', $info['data']->student_id) }}" class="edit-button">Detail</a>
+                                        </div>
+                                            <div class="delete-btn">    
+                                                @if($info['count'] >= 3)
+                                                <a href="{{ route('pages.cetakPdf', $info['data']->student->id) }}" class="edit-button">Cetak PDF</a>
+                                                @endif
+                                            </div>
+                                    </div>
+                                    
                                 </td>
                             </tr>
                         <?php endforeach; ?>
