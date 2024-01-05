@@ -12,7 +12,7 @@
     <link href='https://unpkg.com/boxicons@2.1.4/dist/boxicons.js' rel='stylesheet'>
     <title>Rekam Keterlambatan | SMK WIKRAMA BOGOR</title>
 </head>
-<body>
+<body class="bg-gray-100">
   <nav class="bg-gray-800">
     <div class="max-w-auto mx-auto px-2 sm:px-6 lg:px-8">
       <div class="relative flex items-center justify-between">
@@ -64,4 +64,8 @@
 
       </style>
 </body>
+
+<script src="{{ asset('js/logout.js') }}"></script>
+
+
 </html>

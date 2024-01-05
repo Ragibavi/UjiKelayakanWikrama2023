@@ -86,3 +86,19 @@ Route::middleware(['IsLogin','IsUser'])->group(function () {
 Route::get('/fallback', function () {
     return view('pages.notFound');
 })->name('notFound');
+
+Route::middleware(['storeLastVisitedPage', 'redirectLastVisitedPage'])->group(function () {
+    Route::redirect('/', '/login');
+
+    Route::get('/login', function () {
+        if (Auth::check()) {
+            return redirect('/fallback');
+        } else {
+            return view('login');
+        }
+    })->name('login');
+    
+    Route::get('/fallback', function () {
+        return view('pages.notFound');
+    })->name('notFound');
+});

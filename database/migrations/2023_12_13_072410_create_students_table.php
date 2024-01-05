@@ -12,7 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('students', function (Blueprint $table) {
-            $table->bigInteger('id')->primary();
+            $table->id();
             $table->string('nis');
             $table->string('name');
             $table->string('rombel_id')->constrained()->cascadeOnDelete();
