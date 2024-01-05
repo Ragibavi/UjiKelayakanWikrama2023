@@ -1,4 +1,4 @@
-@extends('navbar.navbar')
+@extends('navbar.navbarUser')
 
 <template>
     @section('content')
@@ -10,7 +10,7 @@
         <div class="flex items-center justify-center">
             <div class="data-container w-[92%] h-auto bg-white rounded-md mt-[180px]">
                 <div class="button mt-6">
-                    <a href="#" class="w-[200px] h-[80px] rounded-md text-white px-3 py-2 text-x ml-2" style="background: rgb(243, 19, 19);">Export Data Keterlambatan</a>
+                    <a href="{{ route('pages.dateLate.export')}}" class="w-[200px] h-[80px] rounded-md text-white px-3 py-2 text-x ml-2" style="background: rgb(243, 19, 19);">Export Data Keterlambatan</a>
                 </div>
                 <div class="data-late mt-6 ml-12 mr-12 flex justify-between items-center">
                     <div>

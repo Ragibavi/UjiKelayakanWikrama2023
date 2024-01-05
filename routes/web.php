@@ -72,4 +72,5 @@ Route::middleware(['IsLogin','IsUser'])->group(function () {
     Route::get('/datalate/User', [LateController::class, 'indexUser'])->name('pages.user.dateLate');
     Route::get('/dateLateDetail/{student_id}', [LateController::class, 'detail'])->name('pages.dateLate.detail');
     Route::get('/cetakPdf/{id}', [StudentController::class, 'cetakPdf'])->name('pages.cetakPdf');
+    Route::get('/export', [LateController::class, 'export'])->name('pages.dateLate.export');
 });

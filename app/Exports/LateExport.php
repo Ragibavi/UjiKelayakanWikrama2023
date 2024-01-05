@@ -6,6 +6,8 @@ use App\Models\Late;
 use App\Models\Student;
 use App\Models\Rayon;
 use App\Models\Rombel;
+use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 use Maatwebsite\Excel\Concerns\FromCollection;
 
 class LateExport implements FromCollection
@@ -15,39 +17,53 @@ class LateExport implements FromCollection
     */
     public function collection()
     {   
-        $late = Late::with('student')->get()->map(function ($late) {
-            return collect([
-                // tambahkan field lainnya yang Anda butuhkan di sini
-                'student_nis' => $late->student->nis,
-                'student_name' => $late->student->name,
-                'rombel_name' => $late->student->rombel->rombel,
-                'rayon_name' => $late->student->rayon->rayon,
+
+        if(Auth::user()->role == 'admin'){
+            $late = Late::with('student')->get()->map(function ($late) {
+                return collect([
+                    'student_nis' => $late->student->nis,
+                    'student_name' => $late->student->name,
+                    'rombel_name' => $late->student->rombel->rombel,
+                    'rayon_name' => $late->student->rayon->rayon,
+                    'total' => $late->student->late->count(),
+                ]);
+            });
+
+            $late->prepend([
+                'NIS',
+                'Nama',
+                'Rombel',
+                'Rayon',
+                'Total',
             ]);
-        });
-
-        // Menghitung total data duplikat
-        $counts = $late->countBy(function ($item) {
-            return $item['student_name'];
-        });
-
-        // Menghapus data duplikat
-        $late = $late->unique('student_name');
-
-        // Menambahkan total ke setiap item
-        $late = $late->map(function ($item) use ($counts) {
-            return $item->put('total', $counts[$item['student_name']]);
-        });
-
-        $late->prepend([
-            'NIS',
-            'Nama',
-            'Rombel',
-            'Rayon',
-            'Total',
-        ]);
+        
     
+            return $late;
+        }else {
+            $students = Student::where('rayon_id', function ($query) {
+                $query->select('id')
+                    ->from('rayons')
+                    ->where('user_id', Auth::user()->id);
+            })->with('late')->get()->map(function ($students) {
+                return collect([
+                    'student_nis' => $students->nis,
+                    'student_name' => $students->name,
+                    'rombel_name' => $students->rombel->rombel,
+                    'rayon_name' => $students->rayon->rayon,
+                    'total' => $students->late->count(),
+                ]);
+            });
 
-        return $late;
+            $students->prepend([
+                'NIS',
+                'Nama',
+                'Rombel',
+                'Rayon',
+                'Total',
+            ]);
+
+            return $students;
+        }
     }
 }
 
