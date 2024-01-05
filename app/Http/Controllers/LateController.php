@@ -117,9 +117,6 @@ class LateController extends Controller
 
         $lateAll = Late::all()->where('student_id', $student_id);
 
-
-
-
         return view('pages.dateLateDetail', compact('students', 'rombel', 'rayon', 'studentLate', 'lateAll'));
     }
 

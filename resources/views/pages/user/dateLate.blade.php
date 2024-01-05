@@ -4,7 +4,7 @@
     @section('content')
     <div class="bg-blue-100 w-full h-full">
         <div class="flex flex-col justify-start ml-20 mb-[-150px]">
-            <h1 class="text-3xl mt-8">Tambah Data Keterlambatan {{ Auth::user()->name }}</h1>
+            <h1 class="text-3xl mt-8">Data Keterlambatan {{ Auth::user()->name }}</h1>
             <p class="text-[15px] mt-2 ml-[2px]">Home / <span class="font-bold">Data Keterlambatan</span> </p>
         </div>
         <div class="flex items-center justify-center">
