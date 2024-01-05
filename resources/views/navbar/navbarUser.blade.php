@@ -20,7 +20,7 @@
         <div class="flex items-center flex-grow-0 mr-12">
           <a href="{{ Route('pages.user.dashboard') }}" class="text-gray-300 hover:text-white px-3 py-2 text-xl mt-1 rounded-md text-sm font-medium">Dashboard</a>
           <a href="{{ Route('pages.user.student')}}" class="text-gray-300 hover:text-white px-3 py-2 text-xl mt-1 rounded-md text-sm font-medium">Data Siswa</a>
-          <a href="#" class="text-gray-300 hover:text-white px-3 py-2 text-xl mt-1 rounded-md text-sm font-medium">Data Keterlambatan</a>
+          <a href="{{ Route('pages.user.dateLate')}}" class="text-gray-300 hover:text-white px-3 py-2 text-xl mt-1 rounded-md text-sm font-medium">Data Keterlambatan</a>
           <a href="{{ route('logout') }}" class="text-gray-300 hover:text-white px-3 py-2 text-xl mt-1 rounded-md text-sm font-medium">Logout</a>
         </div>
       </div>

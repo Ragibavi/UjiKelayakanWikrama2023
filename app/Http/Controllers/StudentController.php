@@ -10,6 +10,7 @@ use App\Models\Late;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Carbon;
+use PDF;
 
 class StudentController extends Controller
 {   
@@ -37,6 +38,7 @@ class StudentController extends Controller
         $rayon = Rayon::all();
         $rombel =Rombel::all();
         $lates = Late::all();
+        
         $totalStudents = Student::where('rayon_id', function ($query) {
             $query->select('id')
                 ->from('rayons')
@@ -53,6 +55,7 @@ class StudentController extends Controller
         
         return view('pages.user.dashboard', compact('students', 'rayon', 'rombel', 'users', 'lates', 'totalStudents', 'lateStudent'));
     }
+
     public function studentUser()
     {
         $users = User::all();
@@ -67,6 +70,21 @@ class StudentController extends Controller
         })->get();
       
         return view('pages.user.student', compact('students', 'rayon', 'rombel', 'users', 'total'));
+    }
+
+    public function cetakPdf($id)
+    {
+        $students = Student::where('id', $id)->get();
+        $user = User::all();
+        $late = Late::where('student_id', $id)->get();
+        $rayon = Rayon::all();
+        $rombel = Rombel::all();
+        $userAuth = Auth::user();
+        $pdf = PDF::loadView('pages.suratPdf', compact('students', 'rayon', 'rombel', 'userAuth', 'late'));
+
+        // return view('pages.suratPdf', compact('students', 'rayon', 'rombel', 'userAuth', 'late'));
+
+        return $pdf->stream();
     }
 
     /**

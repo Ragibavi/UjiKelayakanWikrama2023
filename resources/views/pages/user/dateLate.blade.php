@@ -10,8 +10,7 @@
         <div class="flex items-center justify-center">
             <div class="data-container w-[92%] h-auto bg-white rounded-md mt-[180px]">
                 <div class="button mt-6">
-                    <a href="{{route('pages.dateLate.create')}}" class="w-[200px] h-[80px] rounded-md text-white px-3 py-2 text-x ml-12" style="background: rgb(0, 145, 255);">Tambah Data Keterlambatan</a>
-                    <a href="{{ route('pages.dateLate.export')}}" class="w-[200px] h-[80px] rounded-md text-white px-3 py-2 text-x ml-2" style="background: rgb(243, 19, 19);">Export Data Keterlambatan</a>
+                    <a href="#" class="w-[200px] h-[80px] rounded-md text-white px-3 py-2 text-x ml-2" style="background: rgb(243, 19, 19);">Export Data Keterlambatan</a>
                 </div>
                 <div class="data-late mt-6 ml-12 mr-12 flex justify-between items-center">
                     <div>
@@ -36,12 +35,11 @@
                         <th>Tanggal</th>
                         <th>Informasi</th>
                         <th>Bukti</th>
-                        <th>Action</th>
                       </tr>
                     </thead>
                     <tbody class="">
                         <?php $no=1 ?>  
-                        @foreach($lates as $data)  
+                        @foreach($lateStudent as $data)  
                       <tr>
                         <td>{{$no++}}</td>
                         <td>{{ $data->student->nis }}
@@ -51,20 +49,6 @@
                         <td>{{ $data->date_time_late}}</td>
                         <td>{{ $data->information}}</td>
                         <td><img class="w-[150px] h-auto" src="{{asset('images/'. $data->bukti)}}" alt=""></td>
-                        <td>
-                            <div class="button-container">
-                                <div class="edit-btn">
-                                    <a href="{{ route('pages.dateLate.edit', $data->id) }}" class="edit-button">Edit</a>
-                                </div>
-                                <form action="{{ route('pages.dateLate.destroy', $data->id) }}" method="POST" style="display: inline;">
-                                    @csrf
-                                    @method('DELETE')
-                                    <div class="delete-btn">    
-                                        <button type="submit" style="color: #ffffff;" class="delete-button" onclick="return confirm('Are you sure you want to delete this item?')">Delete</button>
-                                    </div>
-                                </form>
-                            </div>
-                        </td>
                       </tr>
                       @endforeach
                     </tbody>
@@ -77,14 +61,14 @@
                             <th>NIS</th>
                             <th>Nama</th>
                             <th>Jumlah Keterlambatan</th>
-                            <th>Action</th>
+                            <th>Cetak PDF</th>
                         </tr>
                     </thead>
                     <tbody>
                         <?php 
                         $no = 1; 
                         $names = []; 
-                        foreach ($lates as $data) : 
+                        foreach ($lateStudent as $data) : 
                             $nis = $data->student->nis; 
                             $name = $data->student->name; 
                             if (!array_key_exists($name, $names)) {
@@ -100,18 +84,7 @@
                                 <td>{{ $name }}</td>
                                 <td>{{ $info['count'] }}</td>
                                 <td>
-                                    <div class="button-container">
-                                        <div class="edit-btn">
-                                            <a href="{{ route('pages.dateLate.detail', $info['data']->student_id) }}" class="edit-button">Detail</a>
-                                        </div>
-                                        <form action="{{ route('pages.dateLate.destroy', $info['data']->id) }}" method="POST" style="display: inline;">
-                                            @csrf
-                                            @method('DELETE')
-                                            <div class="delete-btn">    
-                                                <button type="submit" style="color: #ffffff;" class="delete-button" onclick="return confirm('Are you sure you want to delete this item?')">Delete</button>
-                                            </div>
-                                        </form>
-                                    </div>
+                                    <a href="{{ route('pages.cetakPdf', $info['data']->student->id) }}" class="edit-button">Edit</a>
                                 </td>
                             </tr>
                         <?php endforeach; ?>
