@@ -14,7 +14,7 @@ class IsUser
         if(Auth::user()->role == 'user') {
             return $next($request);
         } else {
-            return redirect('/login')->with('error', 'Unauthorized. Insufficient role.');
+            return redirect('/fallback');
         }
     }
 }

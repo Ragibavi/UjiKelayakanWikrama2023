@@ -3,6 +3,8 @@
 namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
 use App\Models\User;
 
 class UserSeeder extends Seeder
@@ -14,10 +16,23 @@ class UserSeeder extends Seeder
      */
     public function run()
     {
-        User::factory(10)->create([
-            'rayon_id' => function () {
-                return \App\Models\Rayon::factory()->create()->id;
-            },
-        ]);
+        $users = [
+            [
+                'name' => 'Administrator',
+                'email' => 'Admin@gmail.com',
+                'password' => Hash::make('admin'),
+                'role' => 'admin',
+            ],
+            [
+                'name' => 'User',
+                'email' => 'user@gmail.com',
+                'password' => Hash::make('user'),
+                'role' => 'user',
+            ],
+        ];
+
+        foreach ($users as $user) {
+            User::create($user);
+        }
     }
 }

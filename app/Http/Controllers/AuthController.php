@@ -23,16 +23,6 @@ class AuthController extends Controller
     public function create(){
         return view('pages.userCreate');
     }
-
-    public function store(Request $request){
-        $user = new User();
-        $user->name = $request->name;
-        $user->email = $request->email;
-        $user->password = Hash::make($request->password);
-        $user->role = $request->role;
-        $user->save();
-        return redirect('/user')->with('success', 'Register Success');
-    }
     
 
     public function edit(User $user, $id)
@@ -57,11 +47,6 @@ class AuthController extends Controller
         $user = User::find($id);
         $user->delete();
         return redirect('/user')->with('success', 'Data Berhasil Dihapus');
-    }
-
-    public function register()
-    {
-        return view('register');
     }
 
     public function login()

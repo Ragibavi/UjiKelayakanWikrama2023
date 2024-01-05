@@ -6,6 +6,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\RombelController;
 use App\Http\Controllers\RayonController;
 use App\Http\Controllers\LateController;
+use Illuminate\Support\Facades\Auth;
 
 /*
 |--------------------------------------------------------------------------
@@ -18,13 +19,20 @@ use App\Http\Controllers\LateController;
 |
 */
 
-Route::get('/register', [AuthController::class, 'register'])->name('register');
-Route::post('/register', [AuthController::class, 'store'])->name('registerPost');
-Route::get('/login', [AuthController::class, 'login'])->name('login');
+Route::redirect('/', '/login');
+Route::get('/login', function () {
+    if (Auth::check()) {
+        return redirect('/fallback');
+    } else {
+        return view('login');
+    }
+})->name('login');
 Route::post('/login', [AuthController::class, 'loginAuth'])->name('loginPost');
 Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
 
 Route::middleware(['IsLogin','IsAdmin'])->group(function () {
+
+
     Route::get('/dashboard', [StudentController::class, 'indexDashboard'])->name('pages.dashboardAdmin');
 
     Route::get('/user', [AuthController::class, 'index'])->name('pages.user');
@@ -74,3 +82,7 @@ Route::middleware(['IsLogin','IsUser'])->group(function () {
     Route::get('/cetakPdf/{id}', [StudentController::class, 'cetakPdf'])->name('pages.cetakPdf');
     Route::get('/export', [LateController::class, 'export'])->name('pages.dateLate.export');
 });
+
+Route::get('/fallback', function () {
+    return view('pages.notFound');
+})->name('notFound');
